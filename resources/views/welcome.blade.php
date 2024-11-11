@@ -16,6 +16,7 @@
 <!-- Navbar -->
 
 <body class="flex flex-col min-h-screen">
+  
     <header class="bg-green-600 text-white sticky top-0 z-50 shadow-lg p-2">
         <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
             <a href="#" class="flex items-center space-x-2 text-2xl font-bold text-indigo-800 dark:text-white transition-colors duration-300">
