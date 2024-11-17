@@ -4,469 +4,538 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laravel Sticky Navbar</title>
+    <title>Local Bizzy</title>
+    
     <!-- Mengimpor CSS yang sudah di-compile oleh Laravel Mix -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/tailwindcss-cdn@3.4.1/tailwindcss.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>   
+    <script src="https://cdn.jsdelivr.net/npm/@flowbite/carousel@1.0.5/dist/carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@1.4.0/dist/flowbite.min.js"></script>
+
+
+
 </head>
 
 
-<!-- Navbar -->
 
-<body class="flex flex-col min-h-screen">
-  
-    <header class="bg-green-600 text-white sticky top-0 z-50 shadow-lg p-2">
+
+<body class="bg-white"
+    style=" margin: 0; padding: 0; box-sizing: border-box; overflow-x: hidden; /* Ini mencegah overflow horizontal */">
+
+    <header
+        class="bg-blur-600 text-white sticky top-0 z-50 shadow-lg p-1 rounded-b-[30px] backdrop-blur-md bg-opacity-40">
         <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="flex items-center space-x-2 text-2xl font-bold text-indigo-800 dark:text-white transition-colors duration-300">
+            <a href="#"
+                class="flex items-center space-x-2 text-2xl font-bold text-indigo-800 dark:text-green-600 transition-colors duration-300">
                 <!-- Icon on the left -->
-                <img src="{{ asset('images/file.png') }}" alt="file" class="w-12 h-12">
+                <img src="{{ asset('images/1.png') }}" alt="file" class="w-14 h-12">
                 <span>Local Bizzy</span>
             </a>
-            
+
             <div class="hidden md:flex space-x-6">
-                <a href="#" class="nav-link text-gray-700 dark:text-gray-200 hover:text-indigo-800 dark:hover:text-white transition-colors duration-300">Home</a>
-                <a href="#" class="nav-link text-gray-700 dark:text-gray-200 hover:text-indigo-800 dark:hover:text-white transition-colors duration-300">About</a>
-                <a href="#" class="nav-link text-gray-700 dark:text-gray-200 hover:text-indigo-800 dark:hover:text-white transition-colors duration-300">Services</a>
-                <a href="#" class="nav-link text-gray-700 dark:text-gray-200 hover:text-indigo-800 dark:hover:text-white transition-colors duration-300">Contact</a>
+                <a href="#" 
+                class="nav-link text-green-500 dark:hover:text-green-500 border-b-4  border-green-400 hover:border-green-500   duration-300 font-poppins" 
+                id="home-link" onclick="setActiveLink(event, 'home')">Beranda</a>
+             
+             <a href="#about" 
+                class="nav-link text-black dark:hover:text-green-500  hover:border-green-500   duration-300 font-poppins" 
+                id="about-link" onclick="setActiveLink(event, 'about')">Tentang</a>
+
+                     
+
+                <a href="{{ route('privasi') }}"
+                    class="nav-link text-black dark:text-black  dark:hover:text-green-500 transition-colors duration-300 font-poppins">Kebijakan</a>
+
+                <a href="{{ route('panduan') }}"
+                    class="nav-link text-black dark:text-black  dark:hover:text-green-500 transition-colors  duration-300 font-poppins">Panduan</a>
             </div>
-        
+
+
+
             <div class="hidden md:flex items-center space-x-4">
                 @if (Route::has('register'))
                     @guest
-                        <a href="{{ route('register') }}" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors duration-300">Sign Up</a>
-                        <a href="{{ route('login') }}" class="inline-block border border-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-500 hover:text-white transition-colors duration-300">
+                        <a href="{{ route('register') }}"
+                            class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors duration-300">Sign
+                            Up</a>
+                        <a href="{{ route('login') }}"
+                            class="inline-block border border-green-500 text-black px-4 py-2 rounded-lg hover:bg-green-600 hover:text-black transition-colors duration-300">
                             Masuk
                         </a>
                     @endguest
-            
+
                     @auth
                         @if (Route::has('login'))
-                            <a href="{{ url('/dashboard') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                            <a href="{{ url('/umkm') }}"
+                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                 Dashboard
                             </a>
                         @endif
                     @endauth
                 @endif
             </div>
-            
-        
+
         </nav>
-        
-       
     </header>
-<!-- carousel -->
 
-<div class="w-full ">
 
-    <div id="default-carousel" class="relative" data-carousel="static">
-        <!-- Carousel wrapper -->
-        <div class="overflow-hidden relative h-48 sm:h-64 md:h-80 lg:h-96 xl:h-[500px] rounded-lg">
-            <!-- Item 1 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <span class="absolute top-1/2 left-1/2 text-2xl font-semibold text-white -translate-x-1/2 -translate-y-1/2 sm:text-3xl dark:text-gray-800">First Slide</span>
-                <img src="https://flowbite.com/docs/images/carousel/carousel-1.svg" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
-            </div>
-            <!-- Item 2 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
-            </div>
-            <!-- Item 3 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
-            </div>
-        </div>
-        <!--- Slide Indicators -->
-        <div class="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2">
-            <button type="button" class="w-3 h-3 rounded-full bg-green-800 hover:bg-green-700" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-            <button type="button" class="w-3 h-3 rounded-full bg-green-800 hover:bg-green-700" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-            <button type="button" class="w-3 h-3 rounded-full bg-green-800 hover:bg-green-700" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-        </div>
-        
-        <!-- Slider controls -->
-        <button type="button" class="flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none" data-carousel-prev>
-    <span class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-green-500 group-hover:bg-green-600 group-focus:ring-4 group-focus:ring-green-300">
-        <svg class="w-5 h-5 text-white sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-        </svg>
-        <span class="hidden">Previous</span>
-    </span>
-</button>
-<button type="button" class="flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none" data-carousel-next>
-    <span class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-green-500 group-hover:bg-green-600 group-focus:ring-4 group-focus:ring-green-300">
-        <svg class="w-5 h-5 text-white sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-        </svg>
-        <span class="hidden">Next</span>
-    </span>
-</button>
-
-    <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
-</div>
-
+ <!-- Konten Utama -->
 <div class="container mx-auto mt-16 py-10 px-4">
-    <h1 class="text-4xl font-semibold mb-6 text-center">Temukan UMKM Terdekat di sekitarmu!</h1>
-    <p class="text-lg text-black-200 font-semibold mb-8 text-center">Langsung di gasss aja....</p>
-    
-    <div class="flex justify-center">
-        <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden w-full max-w-lg">
-            <div class="p-3 bg-gray-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm0 0l5 5m-5-5h-3m3 0h3" />
-                </svg>
+    <!-- Teks Selamat Datang -->
+    <h1 class="text-4xl font-semibold mb-4">Selamat datang di <span class="text-green-500">Local Bizzy!</span></h1>
+    <p class="text-lg text-gray-700 font-semibold mb-6">Dapatkan infonya di sini...</p>
+
+    <!-- Form Pencarian -->
+    <div class="max-w-lg">
+        <form action="{{ route('umkm.search') }}" method="GET" class="mb-6">
+            <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                <div class="p-3 bg-gray-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm0 0l5 5m-5-5h-3m3 0h3" />
+                    </svg>
+                </div>
+                <input type="text" name="search" placeholder="Silahkan cari kuliner,kerajinan,fashion atau nama umkm"
+                    class="w-full py-2 px-4 text-gray-700 focus:outline-none" />
+                <button class="bg-green-500 text-white py-2 px-4 hover:bg-green-700 rounded-r-lg">Cari</button>
             </div>
-            
-            <input type="text" placeholder="Ayo Cari UMKM Terdekat di daerahmu" class="w-full py-2 px-4 text-gray-700 focus:outline-none" />
-            
-            <button class="bg-green-500 text-white py-2 px-4 hover:bg-green-700 transition-colors duration-300 rounded-3xl">Cari</button>
-        </div>
+        </form>
     </div>
 </div>
 
 
-<!-- Container for aligning with header icon -->
-<div class="container mx-auto px-4">
-<!-- Dropdown menu and card content in a larger green gradient container with rounded corners -->
-<div class="bg-gradient-to-r from-green-300 to-green-500 py-8 rounded-lg mt-4">
-  
-    <!-- Dropdown menu -->
-    <div class="container max-w-7xl mx-auto px-4 py-4 flex items-center gap-4">
-        <h1 class="text-4xl font-semibold text-white">Rekomendasi</h1>
-        
-        <div class="relative">
-            <button onclick="showDropdownOptions()" 
-                class="flex items-center justify-between w-60 px-4 py-3 text-gray-700 bg-white border 
-                       border-gray-300 rounded-md shadow focus:outline-none focus:border-green-600">
-                <span class="select-none">Pilih Kota</span>
-                
-                <!-- Arrow Icons -->
-                <svg id="arrow-down" class="hidden w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-                <svg id="arrow-up" class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
+<div class="scroll-animate" id="element1">
+    <div class="max-w-6xl mx-auto mt-20">
+
+        <div id="default-carousel" class="relative rounded-lg overflow-hidden shadow-lg" data-carousel="static"
+            data-carousel-interval="3000">
+            <!-- Carousel wrapper -->
+            <div class="relative h-70 md:h-80" data-carousel-inner>
+                <!-- Item 1 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <img src="{{ asset('images/bg_index.png') }}" class="object-cover w-full h-full" alt="Slide 1">
+
+
+                </div>
+                <!-- Item 2 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <img src="{{ asset('images/bg_index4.png') }}" class="object-cover w-full h-full" alt="Slide 2">
+                </div>
+                <!-- Item 3 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <img src="{{ asset('images/bg_6.png') }}"
+                        class="object-cover w-full h-full" alt="Slide 3">
+                </div>
+            </div>
+            <!-- Slider indicators -->
+            <div class="flex absolute bottom-5 left-1/2 z-30 -translate-x-1/2 space-x-2" data-carousel-indicators>
+                <button type="button"
+                    class="w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 focus:outline-none focus:bg-gray-400 transition"></button>
+                <button type="button"
+                    class="w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 focus:outline-none focus:bg-gray-400 transition"></button>
+                <button type="button"
+                    class="w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 focus:outline-none focus:bg-gray-400 transition"></button>
+            </div>
+            <!-- Slider controls -->
+            <button type="button"
+                class="flex absolute top-1/2 left-3 z-40 items-center justify-center w-10 h-10 bg-gray-200/50 rounded-full hover:bg-gray-300 focus:outline-none transition"
+                data-carousel-prev>
+                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                    </path>
                 </svg>
             </button>
-
-            <!-- Dropdown options -->
-            <div id="options" class="hidden absolute z-10 w-48 mt-2 bg-white rounded-lg shadow-xl">
-                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-green-500 hover:text-white">Item 1</a>
-                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-green-500 hover:text-white">Item 2</a>
-                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-green-500 hover:text-white">Item 3</a>
-            </div>
+            <button type="button"
+                class="flex absolute top-1/2 right-3 z-40 items-center justify-center w-10 h-10 bg-gray-200/50 rounded-full hover:bg-gray-300 focus:outline-none transition"
+                data-carousel-next>
+                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
         </div>
     </div>
+       
 
-    <!-- Card Content -->
-    <div class="max-w-8xl mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Card 1 -->
-            <div class="bg-gray-200 rounded-lg p-8 transform transition-all hover:-translate-y-2 duration-300 hover:shadow-[0_4px_6px_rgba(255,255,0,0.7),0_1px_3px_rgba(255,255,0,0.4)]">
-                <div class="relative overflow-hidden">
-                    <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">
-                    <div class="absolute inset-0 bg-black opacity-40"></div>
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mt-4">Product Name</h3>
-                <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
-                <div class="flex items-center justify-between mt-4">
-                    <span class="text-gray-900 font-bold text-lg">$29.99</span>
-                    <button class="bg-green-500 text-white py-2 px-4 rounded-full font-bold hover:bg-green-700">Lihat UMKM</button>
-                </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="bg-gray-200 rounded-lg p-8 transform transition-all hover:-translate-y-2 duration-300 hover:shadow-[0_4px_6px_rgba(255,255,0,0.7),0_1px_3px_rgba(255,255,0,0.4)]">
-                <div class="relative overflow-hidden">
-                    <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">
-                    <div class="absolute inset-0 bg-black opacity-40"></div>
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mt-4">Product Name</h3>
-                <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
-                <div class="flex items-center justify-between mt-4">
-                    <span class="text-gray-900 font-bold text-lg">$29.99</span>
-                    <button class="bg-green-500 text-white py-2 px-4 rounded-full font-bold hover:bg-green-700">Lihat UMKM</button>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="bg-gray-200 rounded-lg p-8 transform transition-all hover:-translate-y-2 duration-300 hover:shadow-[0_4px_6px_rgba(255,255,0,0.7),0_1px_3px_rgba(255,255,0,0.4)]">
-                <div class="relative overflow-hidden">
-                    <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">
-                    <div class="absolute inset-0 bg-black opacity-40"></div>
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mt-4">Product Name</h3>
-                <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
-                <div class="flex items-center justify-between mt-4">
-                    <span class="text-gray-900 font-bold text-lg">$29.99</span>
-                    <button class="bg-green-500 text-white py-2 px-4 rounded-full font-bold hover:bg-green-700">Lihat UMKM</button>
-                </div>
-            </div>
-        </div>
     </div>
-</div>
 
-<!-- About Us Section -->
-<div class="container mx-auto mt-16 py-10 px-4">
-    <h1 class="text-4xl font-semibold mb-6 text-center">Apa Sih Local Bizzy?</h1>
-
-<div class="bg-green-500 text-white text-center py-8 rounded-lg mt-4">
-    <h2 class="text-2xl font-bold">Patient Testimonials</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8 max-w-5xl mx-auto">
-      <div class="p-4 shadow-lg rounded-lg bg-green-600 hover:bg-green-500 transition-colors">
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet tristique mi."</p>
-        <h3 class="mt-4 font-bold">- Patient A</h3>
-      </div>
-      <div class="p-4 shadow-lg rounded-lg bg-green-600 hover:bg-green-500 transition-colors">
-        <p>"Nullam ac augue eget diam posuere vehicula. Vivamus quis nulla ac justo euismod posuere."</p>
-        <h3 class="mt-4 font-bold">- Patient B</h3>
-      </div>
-      <div class="p-4 shadow-lg rounded-lg bg-green-600 hover:bg-green-500 transition-colors">
-        <p>"Fusce tincidunt, arcu nec vestibulum tincidunt, eros massa ullamcorper urna."</p>
-        <h3 class="mt-4 font-bold">- Patient C</h3>
-      </div>
-    </div>
-  </section>
-</div>
-<div class="container mx-auto mt-16 py-10 px-4">
-    <h1 class="text-4xl font-semibold mb-6 text-center">Ingin Tahu Lebih Lanjut?</h1>
-</div>
-<!-- Footer container -->
-<footer
-  class="bg-green-500 text-white text-center py-8 rounded-lg mt-4">
-  <div
-    class="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-white/10 lg:justify-between">
-    <div class="me-12 hidden lg:block">
-      <span>Get connected with us on social networks:</span>
-    </div>
-    <!-- Social network icons container -->
-    <div class="flex justify-center">
-      <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 320 512">
-          <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
-          <path
-            d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
-        </svg>
-      </a>
-      <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4 ">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 512 512">
-          <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
-          <path
-            d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
-        </svg>
-      </a>
-      <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 488 512">
-          <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
-          <path
-            d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
-        </svg>
-      </a>
-      <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 448 512">
-          <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
-          <path
-            d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
-        </svg>
-      </a>
-      <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 448 512">
-          <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
-          <path
-            d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z" />
-        </svg>
-      </a>
-      <a href="#!" class="[&>svg]:h-4 [&>svg]:w-4">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 496 512">
-          <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
-          <path
-            d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
-        </svg>
-      </a>
-    </div>
-  </div>
-
-  <!-- Main container div: holds the entire content of the footer, including four sections (TW Elements, Products, Useful links, and Contact), with responsive styling and appropriate padding/margins. -->
-  <div class="mx-6 py-10 text-center md:text-left">
-    <div class="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-      <!-- TW Elements section -->
-      <div class="">
-        <h6
-          class="mb-4 flex items-center justify-center font-semibold uppercase md:justify-start">
-          <span class="me-3 [&>svg]:h-4 [&>svg]:w-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor">
-              <path
-                d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 00.372-.648V7.93zM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 00.372.648l8.628 5.033z" />
-            </svg>
-          </span>
-          TW Elements
-        </h6>
-        <p>
-          Here you can use rows and columns to organize your footer
-          content. Lorem ipsum dolor sit amet, consectetur adipisicing
-          elit.
-        </p>
-      </div>
-      <!-- Products section -->
-      <div>
-        <h6
-          class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
-          Products
-        </h6>
-        <p class="mb-4">
-          <a href="#!">Angular</a>
-        </p>
-        <p class="mb-4">
-          <a href="#!">React</a>
-        </p>
-        <p class="mb-4">
-          <a href="#!">Vue</a>
-        </p>
-        <p>
-          <a href="#!">Laravel</a>
-        </p>
-      </div>
-      <!-- Useful links section -->
-      <div>
-        <h6
-          class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
-          Useful links
-        </h6>
-        <p class="mb-4">
-          <a href="#!">Pricing</a>
-        </p>
-        <p class="mb-4">
-          <a href="#!">Settings</a>
-        </p>
-        <p class="mb-4">
-          <a href="#!">Orders</a>
-        </p>
-        <p>
-          <a href="#!">Help</a>
-        </p>
-      </div>
-      <!-- Contact section -->
-      <div>
-        <h6
-          class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
-          Contact
-        </h6>
-        <p class="mb-4 flex items-center justify-center md:justify-start">
-          <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor">
-              <path
-                d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
-              <path
-                d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
-            </svg>
-          </span>
-          New York, NY 10012, US
-        </p>
-        <p class="mb-4 flex items-center justify-center md:justify-start">
-          <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor">
-              <path
-                d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
-              <path
-                d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
-            </svg>
-          </span>
-          info@example.com
-        </p>
-        <p class="mb-4 flex items-center justify-center md:justify-start">
-          <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor">
-              <path
-                fill-rule="evenodd"
-                d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z"
-                clip-rule="evenodd" />
-            </svg>
-          </span>
-          + 01 234 567 88
-        </p>
-        <p class="flex items-center justify-center md:justify-start">
-          <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor">
-              <path
-                fill-rule="evenodd"
-                d="M7.875 1.5C6.839 1.5 6 2.34 6 3.375v2.99c-.426.053-.851.11-1.274.174-1.454.218-2.476 1.483-2.476 2.917v6.294a3 3 0 003 3h.27l-.155 1.705A1.875 1.875 0 007.232 22.5h9.536a1.875 1.875 0 001.867-2.045l-.155-1.705h.27a3 3 0 003-3V9.456c0-1.434-1.022-2.7-2.476-2.917A48.716 48.716 0 0018 6.366V3.375c0-1.036-.84-1.875-1.875-1.875h-8.25zM16.5 6.205v-2.83A.375.375 0 0016.125 3h-8.25a.375.375 0 00-.375.375v2.83a49.353 49.353 0 019 0zm-.217 8.265c.178.018.317.16.333.337l.526 5.784a.375.375 0 01-.374.409H7.232a.375.375 0 01-.374-.409l.526-5.784a.373.373 0 01.333-.337 41.741 41.741 0 018.566 0zm.967-3.97a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H18a.75.75 0 01-.75-.75V10.5zM15 9.75a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V10.5a.75.75 0 00-.75-.75H15z"
-                clip-rule="evenodd" />
-            </svg>
-          </span>
-          + 01 234 567 89
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!--Copyright section-->
-  <div class="bg-black/5 p-6 text-center">
-    <span>© 2023 Copyright:</span>
-    <a class="font-semibold" href="https://tw-elements.com/"
-      >TW Elements</a
-    >
-  </div>
-</footer>
-
-
-
-
-  
-</body>
-  
-<script>
-       function showDropdownOptions() {
-        const options = document.getElementById('options');
-        const arrowDown = document.getElementById('arrow-down');
-        const arrowUp = document.getElementById('arrow-up');
         
-        if (options.classList.contains('hidden')) {
-            options.classList.remove('hidden');
-            arrowDown.classList.add('hidden');
-            arrowUp.classList.remove('hidden');
-        } else {
-            options.classList.add('hidden');
-            arrowDown.classList.remove('hidden');
-            arrowUp.classList.add('hidden');
+
+    </div>
+
+
+    
+    <div class="button flex justify-center gap-8 mt-16">
+        <!-- Shopee Pilih Lokal -->
+        <div class="flex flex-col items-center group">
+  <a href="{{ route('login') }}"
+                class="inline-block transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg active:scale-95 active:shadow-xl">
+                <div class="inline-block border border-green-500 bg-white p-4 rounded-full">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxplRZvWAGZU5QLH8swk-AJZq68eKctkn7YQw8hX34vIaTCISJrfluvapeHjQVhYk881I&usqp=CAU"
+                        alt="Shopee Pilih Lokal" class="w-8 h-8">
+                </div>
+            </a>
+            <a href="{{ route('login') }}"
+                class="text-xs mt-2 text-center group-hover:text-green-500 transform transition-all duration-300 group-hover:scale-110 active:scale-95">
+                Daftar UMKM
+            </a>
+        </div>
+
+        <!-- Shopee Mall -->
+        <div class="flex flex-col items-center group">
+            <a href="{{ route('welcome') }}#searchResults" 
+                class="inline-block transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg active:scale-95 active:shadow-xl">
+                <div class="inline-block border border-green-500 bg-white p-4 rounded-full">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzDBfsc--BS587cU0xb6A6RQLEk3dh5Prwqlbe_7oyRKbjuiVAUZ5AlfNtgGYMI99TJnI&usqp=CAU"
+                        alt="Shopee Mall" class="w-8 h-8">
+                </div>
+            </a>
+            
+            <a href="{{ route('welcome') }}#searchResults" 
+                class="text-xs mt-2 text-center group-hover:text-green-500 transform transition-all duration-300 group-hover:scale-110 active:scale-95">
+                Rekomendasi
+            </a>
+        </div>
+
+        
+        <div class="flex flex-col items-center group">
+            <a href="{{ route('privasi') }}"
+                class="inline-block transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg active:scale-95 active:shadow-xl">
+                <div class="inline-block border border-green-500 bg-white p-4 rounded-full">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNKCJvOJ9LfaSYNjtus-ATjWe9DMkcafxCOBxz8uhbyHpujxhlkY_1x_YJBip21zpq9LE&usqp=CAU"
+                        alt="Pulsa, Tagihan, dan Tiket" class="w-8 h-8">
+                </div>
+            </a>
+            <a href="{{ route('privasi') }}"
+                class="text-xs mt-2 text-center group-hover:text-green-500 transform transition-all duration-300 group-hover:scale-110 active:scale-95">
+                Kebijakan
+            </a>
+        </div>
+    </div>
+    <!-- </div> -->
+    
+    <div id="searchResults" class="max-w-7xl mx-auto px-4 mt-16">
+        <div class="scroll-animate" id="searchResults" class="max-w-7xl mx-auto px-4 mt-16">
+            <div class="text-right">
+                <a href="{{ route('welcome') }}#searchResults" 
+            class="inline-block px-6 py-3 mt-4 text-green-600 bg-white border border-green-600 rounded-lg shadow-lg hover:bg-green-600 hover:text-white transition duration-300 ease-in-out">
+             Lihat Semua
+         </a>
+            </div>
+            
+        <h1 class="text-4xl font-semibold mb-4 text-green-500">Rekomendasi</h1>
+        @if(isset($umkms) && $umkms->count() > 0)
+        <div id="carouselSection" class="swiper umkm-carousel">
+                <div class="swiper-wrapper">
+                    @foreach($umkms as $umkm)
+                        <div class="swiper-slide">
+                            <div class="bg-gray-100 rounded-lg shadow-lg p-6 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_4px_6px_rgba(0,255,0,0.7),0_1px_3px_rgba(0,255,0,0.4)]">
+
+                                <div class="relative aspect-video overflow-hidden rounded-lg">
+                                    @if ($umkm->gambar_umkm)
+                                        <img 
+                                            src="{{ asset(''. $umkm->gambar_umkm) }}" 
+                                            alt="{{ $umkm->nama_umkm }}"
+                                            class="w-full h-full object-cover"
+                                            loading="lazy"
+                                        >
+                                    @else
+                                        <div class="w-full h-full bg-gray-100 flex items-center justify-center">
+                                            <span class="text-gray-400">No image available</span>
+                                        </div>
+                                    @endif
+                                </div>
+    
+                                <h3 class="text-xl font-bold text-gray-900 mt-4 truncate">
+                                    {{ $umkm->nama_umkm }}
+                                </h3>
+    
+                                <p class="text-gray-500 text-sm mt-2 line-clamp-2 h-10">
+                                    {{ $umkm->deskripsi }}
+                                </p>
+    
+                                <div class="flex items-center justify-between mt-4">
+                                    <span class="text-gray-900 font-bold text-lg">
+                                        {{ $umkm->kategori }}
+                                    </span>
+                                    <a 
+                                        href="{{ route('umkm.show', $umkm->id) }}" 
+                                        class="bg-green-500 text-white py-2 px-4 rounded-full font-bold hover:bg-green-700 transition-colors duration-300"
+                                    >
+                                        Lihat UMKM
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+    
+                <!-- Navigation Buttons -->
+                <div class="swiper-button-next !w-10 !h-10 !after:text-lg"></div>
+                <div class="swiper-button-prev !w-10 !h-10 !after:text-lg"></div>
+    
+                <!-- Pagination -->
+                <div class="swiper-pagination !bottom-0 !-mb-6"></div>
+            </div>
+        @else
+            <div class="text-center py-8 text-gray-500">
+                Tidak ada data UMKM yang tersedia
+            </div>
+        @endif
+    </div>
+    
+<!-- About Section -->
+<div id="about" class="flex items-center justify-center mb-12">
+    <div class= "scroll-animate" id="searchResults" class="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-8 flex items-center justify-between mt-20">
+        <div>
+            <h2 class="text-center text-3xl font-semibold text-gray-800">Tentang Website <span class="text-green-600">Local Bizzy</span></h2>
+            <br>
+            <p class="text-gray-600 text-1xl">
+                <i>Aplikasi “LocalBiz” dilengkapi dengan beberapa fitur utama yang dirancang
+                    untuk menemukan dan berinteraksi dengan UMKM lokal, serta mendukung digitalisasi
+                    Indonesia. Aplikasi ini menghadirkan pencarian UMKM berbasis lokasi yang memungkinkan
+                    pengguna dengan mudah menemukan UMKM terdekat. Dengan teknologi berbasis lokasi ini, konsumen
+                    termasuk pendatang baru atau mereka yang baru pindah ke daerah tertentu, dapat mencari UMKM
+                    terdekat.</i>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<div class= "scroll-animate" if="searchResults" class="bg-white py-8 border-t mt-24">
+    <div class="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-gray-800">
+        <!-- Konten Footer -->
+        <div class="flex flex-col space-y-4">
+            <div class="flex items-center space-x-2">
+                <img src="{{ asset('images/1.png') }}" alt="Logo" class="w-18 h-14">
+                <span class="text-green-600 font-bold text-lg">Local Bizzy</span>
+            </div>
+            <p>Dapatkan "info UMKM" hanya di Local Bizzy. Daftarkan "UMKM Anda" di sini!</p>
+        </div>
+
+        <div>
+            <h3 class="font-semibold text-lg mb-4">Local Bizzy</h3>
+            <ul class="space-y-2">
+                <li><a href="#" class="hover:underline">Tentang Kami</a></li>
+                <li><a href="#" class="hover:underline">Promosikan UMKM Anda</a></li>
+                <li><a href="#" class="hover:underline">Pusat Bantuan</a></li>
+            </ul>
+        </div>
+
+        <!-- Link Kebijakan -->
+        <div>
+            <h3 class="font-semibold text-lg mb-4">KEBIJAKAN</h3>
+            <ul class="space-y-2">
+                <li><a href="#" class="hover:underline">Kebijakan Privasi</a></li>
+                <li><a href="#" class="hover:underline">Syarat dan Ketentuan Umum</a></li>
+            </ul>
+        </div>
+
+        <!-- Kontak Kami -->
+        <div>
+            <h3 class="font-semibold text-lg mb-4">HUBUNGI KAMI</h3>
+            <ul class="space-y-2">
+                <li class="flex items-center space-x-2">
+                    <span>📧</span>
+                    <a href="mailto:cs@malang.com" class="hover:underline">Local Bizzy.com</a>
+                </li>
+                <li class="flex items-center space-x-2">
+                    <span>📱</span>
+                    <a href="tel:+628814990427" class="hover:underline">+628814990427</a>
+                </li>
+                <li class="flex space-x-4 mt-4">
+                    <a href="#" class="hover:text-gray-600">🌐</a>
+                    <a href="#" class="hover:text-gray-600">🐦</a>
+                    <a href="#" class="hover:text-gray-600">📷</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr class="my-8 max-w-3xl mx-auto border-t-1 border-gray-300">
+
+<div class="max-w-7xl mx-auto text-center">
+    <p class="text-sm">&copy; 2024 <a href="" class="hover:underline">Local Bizzy.com</a>. All rights reserved.</p>
+</div>
+<script>
+    // Fungsi untuk mengatur link aktif
+    function setActiveLink(event, link) {
+        // Menghapus kelas hijau dan border bawah dari semua link
+        document.querySelectorAll('.nav-link').forEach(function(linkElement) {
+            linkElement.classList.remove('text-green-500');
+            linkElement.classList.add('text-black');
+            linkElement.classList.remove('border-green-500');
+            linkElement.classList.remove('border-b-4');
+            linkElement.classList.add('border-green-400');
+        });
+    
+        // Menambahkan kelas hijau dan border bawah pada link yang diklik
+        const clickedLink = event.target;
+        clickedLink.classList.remove('text-black');
+        clickedLink.classList.add('text-green-500');
+        clickedLink.classList.add('border-green-500');
+        clickedLink.classList.add('border-b-4');
+    }
+    
+    // Fungsi untuk scroll ke hasil pencarian
+    function scrollToResults() {
+        const searchResults = document.getElementById('searchResults');
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('search');
+        
+        if (searchQuery && searchResults) {
+            setTimeout(() => {
+                const headerOffset = 100; // Sesuaikan dengan tinggi header Anda
+                const elementPosition = searchResults.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+                
+                searchResults.classList.add('search-highlight');
+                setTimeout(() => {
+                    searchResults.classList.remove('search-highlight');
+                }, 1000);
+            }, 300); // Increased delay untuk memastikan konten sudah dimuat
         }
     }
-</script>
-
-
-
-   
     
+    // Event listener saat DOM sudah dimuat
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inisialisasi Swiper
+        new Swiper('.umkm-carousel', {
+            slidesPerView: 1,
+            spaceBetween: 24,
+            loop: false,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                }
+            }
+        });
+    
+        // Attach event listener untuk form pencarian
+        const searchForm = document.getElementById('searchForm');
+        if (searchForm) {
+            searchForm.addEventListener('submit', function(e) {
+                // Form akan di-submit secara normal
+                // Scroll akan ditangani oleh scrollToResults setelah halaman dimuat ulang
+            });
+        }
+    
+        // Panggil scrollToResults setelah halaman dimuat
+        scrollToResults();
+    });
+    
+    // Event listener untuk scroll animation
+    // Event listener untuk scroll animation
+window.addEventListener('scroll', function() {
+    var elements = document.querySelectorAll('.scroll-animate');
+    elements.forEach(function(element) {
+        var position = element.getBoundingClientRect();
+        var offset = 100; // Offset untuk trigger animation
+
+        // Check if element is entering viewport
+        if (position.top < window.innerHeight - offset && position.bottom > 0) {
+            element.classList.add('active');
+        } else {
+            // Remove active class when element is out of viewport
+            element.classList.remove('active');
+        }
+    });
+}, { passive: true });
+    // Handle browser navigation
+    window.addEventListener('popstate', scrollToResults);
+    </script>
+    
+    
+<style>
+    .swiper-button-next,
+    .swiper-button-prev {
+        background-color: rgb(34 197 94); /* bg-green-500 */
+        border-radius: 9999px;
+        color: white !important;
+    }
+
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+        background-color: rgb(21 128 61); /* bg-green-700 */
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .swiper-pagination-bullet-active {
+        background-color: rgb(34 197 94) !important; /* bg-green-500 */
+    }
+    /* Definisikan animasi */
+    @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Kelas untuk animasi */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+    will-change: transform, opacity;
+}
+
+
+/* Kelas saat elemen masuk viewport */
+.scroll-animate.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+@keyframes highlightAnimation {
+    0% { background-color: rgba(34, 197, 94, 0.1); } /* green-500 with low opacity */
+    100% { background-color: transparent; }
+}
+
+.search-highlight {
+    animation: highlightAnimation 1s ease-out;
+}
+
+/* Optional: Add some padding to account for fixed headers if you have any */
+html {
+    scroll-padding-top: 2rem; /* Adjust this value based on your header height */
+}
+
+</style>
+
+       
+
+</body>
+
 </html>

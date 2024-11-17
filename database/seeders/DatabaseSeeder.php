@@ -3,21 +3,28 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Umkm;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
+        // Seed data for User
+        $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+        ]);
+
+        // Seed data for Umkm and link to user
+        Umkm::create([
+            'nama_umkm' => 'Andrian Bakso',
+            'alamat' => 'Jl. Mawar No. 123',
+            'nomor_telepon' => '12819831',
+            'kategori' => 'kuliner',
+            'gambar' => '1731383514.png',
+            'deskripsi' => 'Bakso enak dan lezat',
+            'user_id' => $user->id, // Assign the created user's ID
         ]);
     }
 }

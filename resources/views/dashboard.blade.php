@@ -1,65 +1,168 @@
+@extends('layouts.app')
+
+@section('coba')
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/tailwindcss-cdn@3.4.1/tailwindcss.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script src="//unpkg.com/alpinejs" defer></script>
 
 <!-- component -->
-<div class="flex min-h-screen bg-gray-100">
+<div class="flex h-screen bg-gray-100">
     <!-- Sidebar -->
-    <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+    <div class="fixed top-0 left-0 h-screen w-64 bg-gray-700 shadow-xl">
         <div class="mb-2 p-4">
-            <h5 class="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-gray-900">Material Tailwind</h5>
+          
+            <h5 class="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-white">Tambah UMKM</h5>
         </div>
-        
-        <nav class="flex flex-col gap-1 min-w-[240px] p-2 font-sans text-base font-normal text-gray-700">
+        <nav class="flex flex-col gap-1 p-2 text-white">
             <!-- Sidebar items -->
-            <div role="button" tabindex="0" class="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-blue-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
-                <div class="grid place-items-center mr-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-5 w-5">
-                    <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd"></path>
-                  </svg>
-                </div>Profile
-              </div>
-              <div role="button" tabindex="0" class="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-blue-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
-                <div class="grid place-items-center mr-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-5 w-5">
-                    <path fill-rule="evenodd" d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 00-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 00-2.282.819l-.922 1.597a1.875 1.875 0 00.432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 000 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 00-.432 2.385l.922 1.597a1.875 1.875 0 002.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 002.28-.819l.923-1.597a1.875 1.875 0 00-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 000-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 00-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 00-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 00-1.85-1.567h-1.843zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z" clip-rule="evenodd"></path>
-                  </svg>
-                </div>Settings
-              </div>
-              <div role="button" tabindex="0" class="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-blue-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
-                <div class="grid place-items-center mr-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-5 w-5">
-                    <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v9a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM6.166 5.106a.75.75 0 010 1.06 8.25 8.25 0 1011.668 0 .75.75 0 111.06-1.06c3.808 3.807 3.808 9.98 0 13.788-3.807 3.808-9.98 3.808-13.788 0-3.808-3.807-3.808-9.98 0-13.788a.75.75 0 011.06 0z" clip-rule="evenodd"></path>
-                  </svg>
-                </div>Log Out
-            <!-- Add other sidebar items here -->
-        </nav>
-
-        <div class="w-full pt-5 px-4 mb-8 mx-auto">
-            <div class="text-sm text-gray-700 py-1">
-            </div>
-        </div>
-    </div>
-
-    <!-- Main content -->
-    <div class="flex-1">
-        <x-app-layout>
-            <x-slot name="header">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('Dashboard') }}
-                </h2>
-            </x-slot>
-
-            <div class="py-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900">
-                            {{ __("You're logged in!") }}
-                        </div>
+            <div x-data="{ open: false }">
+                <div @click="open = !open" role="button" tabindex="0" class="flex items-center w-full p-3 rounded-lg transition-all hover:bg-gray-400 focus:bg-gray-700 active:bg-gray-700">
+                    <div class="grid place-items-center mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-5 w-5">
+                            <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd"></path>
+                        </svg>
                     </div>
+                    Profile
+                </div>
+
+                <div x-show="open" class="ml-8 mt-2">
+                    <a href="{{ route('profile.edit') }}" class="block p-2 rounded-lg hover:bg-gray-700">Edit Profile</a>
                 </div>
             </div>
-        </x-app-layout>
+            <a href="{{ route('dashboard') }}" role="button" class="flex items-center w-full p-3 rounded-lg hover:bg-gray-400">
+                <div class="grid place-items-center mr-4">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-5 w-5">
+                        <path fill-rule="evenodd" d="M3 5.25a.75.75 0 01.75-.75h5.5a.75.75 0 01.75.75v5.5a.75.75 0 01-.75.75h-5.5A.75.75 0 013 10.75v-5.5zm11 0a.75.75 0 01.75-.75h5.5a.75.75 0 01.75.75v5.5a.75.75 0 01-.75.75h-5.5a.75.75 0 01-.75-.75v-5.5zM3 15.75a.75.75 0 01.75-.75h5.5a.75.75 0 01.75.75v5.5a.75.75 0 01-.75.75h-5.5A.75.75 0 013 21.25v-5.5zm11 0a.75.75 0 01.75-.75h5.5a.75.75 0 01.75.75v5.5a.75.75 0 01-.75.75h-5.5a.75.75 0 01-.75-.75v-5.5z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                Dashboard
+            </a>
+            <a href="{{ route('umkm.create') }}" role="button" class="flex items-center w-full p-3 rounded-lg hover:bg-gray-400">
+                <div class="grid place-items-center mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-5 w-5">
+                        <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v8.25h8.25a.75.75 0 010 1.5H12.75v8.25a.75.75 0 01-1.5 0v-8.25H3.75a.75.75 0 010-1.5h8.25V3a.75.75 0 01.75-.75z" clip-rule="evenodd"/>
+                      </svg>
+                      
+                </div>
+                Tambahkan UMKM
+            </a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="flex items-center w-full p-3 rounded-lg hover:bg-gray-400">
+                    <div class="grid place-items-center mr-4">
+                        <!-- Ikon Logout -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-5 w-5">
+                            <path fill-rule="evenodd" d="M14.75 2.25a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-3h-6v12h6v-3a.75.75 0 011.5 0v4.5a.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75v-15a.75.75 0 01.75-.75h7.5zm4.53 7.22a.75.75 0 00-1.06-1.06l-3 3a.75.75 0 000 1.06l3 3a.75.75 0 001.06-1.06l-2.22-2.22h4.72a.75.75 0 000-1.5h-4.72l2.22-2.22z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    Log Out
+                </button>
+            </form>
+           
+        </nav>
+    </div>
+    <div class="container mx-auto p-4 ml-64">
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">UMKM Anda</h1>
+
+        <table class="min-w-full mt-4 bg-white border border-gray-200 rounded-lg shadow-md">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="border px-4 py-2">ID</th>
+                    <th class="border px-4 py-2">Nama UMKM</th>
+                    <th class="border px-4 py-2">Deskripsi</th>
+                    <th class="border px-4 py-2">Alamat</th>
+                    <th class="border px-4 py-2">Nomor Telepon</th>
+                    <th class="border px-4 py-2">Kategori</th>
+                    <th class="border px-4 py-2">Gambar</th>
+                    <th class="border px-4 py-2">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop untuk menampilkan UMKM -->
+                @foreach($umkms as $umkm)
+                    <tr class="hover:bg-gray-100">
+                        <td class="border px-4 py-2">{{ $umkm->id }}</td>
+                        <td class="border px-4 py-2">{{ $umkm->nama_umkm }}</td>
+                        <td class="border px-4 py-2">{{ $umkm->deskripsi }}</td>
+                        <td class="border px-4 py-2">{{ $umkm->alamat }}</td>
+                        <td class="border px-4 py-2">{{ $umkm->nomor_telepon }}</td>
+                        <td class="border px-4 py-2">{{ $umkm->kategori }}</td>
+                        <td class="border px-4 py-2">
+                            <!-- Menampilkan gambar UMKM -->
+                            @if ($umkm->gambar_umkm)
+                                <img src="{{ asset('' . $umkm->gambar_umkm) }}" alt="Gambar UMKM" width="100" class="mb-2">
+                            @else
+                                <p>No image available</p>
+                            @endif
+
+                            <!-- Menampilkan gambar Menu -->
+                            @if ($umkm->gambar_menu)
+                                <img src="{{ asset('' . $umkm->gambar_menu) }}" alt="Gambar Menu" width="100" class="mb-2">
+                            @else
+                                <p>No image available</p>
+                            @endif
+
+                            <!-- Menampilkan gambar Produk Unggulan -->
+                            @if ($umkm->gambar_unggulan)
+                                <img src="{{ asset('' . $umkm->gambar_unggulan) }}" alt="Gambar Produk Unggulan" width="100" class="mb-2">
+                            @else
+                                <p>No image available</p>
+                            @endif
+                        </td>
+
+                        <td class="border px-4 py-2">
+                            <!-- Tombol untuk Edit dan Hapus -->
+                            <form action="{{ route('destroy_admin', $umkm->id) }}" method="POST" style="display:inline;" id="delete-form-{{ $umkm->id }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" 
+                                        onclick="confirmDelete({{ $umkm->id }})"
+                                        class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-900">
+                                    Hapus
+                                </button>
+                            </form>
+
+                            <script>
+                                function confirmDelete(id) {
+                                    Swal.fire({
+                                        title: 'Apakah Anda yakin?',
+                                        text: "Item ini tidak bisa dikembalikan setelah dihapus!",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',  // Tailwind equivalent color can be used here
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Ya, hapus!',
+                                        cancelButtonText: 'Batal'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            // Trigger form submission after confirmation
+                                            document.getElementById('delete-form-' + id).submit();
+                                        }
+                                    });
+                                }
+
+                                @if (session('success'))
+                                    Swal.fire({
+                                        title: 'Berhasil!',
+                                        text: "{{ session('success') }}",
+                                        icon: 'success',
+                                        confirmButtonColor: '#3085d6'
+                                    });
+                                @endif
+                            </script>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+        <!-- Tombol untuk menambah UMKM baru -->
+        <a href="{{ route('umkm.create') }}" class="mt-4 inline-block bg-blue-500 hover:bg-blue-900 text-white px-4 py-2 rounded">Tambah UMKM</a>
     </div>
 </div>
+
+    @endsection

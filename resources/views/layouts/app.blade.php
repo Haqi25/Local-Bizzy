@@ -29,10 +29,10 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                <!-- Menampilkan konten halaman tanpa slot -->
+                @yield('coba')
             </main>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tw-elements/1.0.0-alpha.4/index.min.js" defer></script>
-
     </body>
 </html>
